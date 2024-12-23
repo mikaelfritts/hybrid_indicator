@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circular Progress Indicator</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Header */
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Circular Progress Container */
+.circular-progress {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background: conic-gradient(#4caf50 0deg, #e6e6e6 0deg);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+}
+
+.circle {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Ensure the inner circle stays on top */
+}
+
+.circle svg {
+    margin-bottom: 5px;
+}
+
+.progress-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Buttons */
+.controls button {
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.controls button:hover {
+    background-color: #0056b3;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Circular Progress Indicator</h1>
+        <!-- Circular Progress Indicator -->
+        <div class="circular-progress" id="circular-progress">
+            <div class="circle">
+                <!-- Inline SVG Sandclock Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="#000">
+                    <path d="M6 2h12v4.074c0 1.229-.472 2.399-1.32 3.289l-1.92 2.015 1.92 2.015c.848.89 1.32 2.06 1.32 3.289V22H6v-5.317c0-1.229.472-2.399 1.32-3.289l1.92-2.015-1.92-2.015C6.472 8.473 6 7.303 6 6.074V2zm2 2v2.074c0 .543.207 1.064.58 1.464l3.42 3.583a1 1 0 0 1 0 1.374l-3.42 3.583a2 2 0 0 0-.58 1.464V20h8v-2.074c0-.543-.207-1.064-.58-1.464l-3.42-3.583a1 1 0 0 1 0-1.374l3.42-3.583a2 2 0 0 0 .58-1.464V4H8z"/>
+                </svg>
+                <div class="progress-text" id="progress-text">0%</div>
+            </div>
+        </div>
+
+        <!-- Buttons to Update Progress -->
+        <div class="controls">
+            <button onclick="updateProgress(25)">25%</button>
+            <button onclick="updateProgress(50)">50%</button>
+            <button onclick="updateProgress(75)">75%</button>
+            <button onclick="updateProgress(100)">100%</button>
+        </div>
+    </div>
+
+    <script>// Function to update circular progress
+function updateProgress(progress) {
+    const circularProgress = document.getElementById('circular-progress');
+    const progressText = document.getElementById('progress-text');
+
+    // Calculate angle for conic gradient based on progress
+    const angle = (progress / 100) * 360;
+
+    // Update the progress circle's background
+    circularProgress.style.background = `conic-gradient(#4caf50 ${angle}deg, #e6e6e6 ${angle}deg)`;
+
+    // Update progress text
+    progressText.textContent = `${progress}%`;
+}
+</script>
+</body>
+</html>
